@@ -23,6 +23,6 @@ function showCPU() {
         }
     }
 
-    xmlhttp.open("GET", "./src/requestHandler.php?q=CPU", true);
+    xmlhttp.open("GET", "./src/componentRequestHandler.php?q=CPU", true);
     xmlhttp.send();
 }
