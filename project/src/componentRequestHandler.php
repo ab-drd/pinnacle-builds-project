@@ -8,7 +8,7 @@
     if ($CPU) {
         $cpus = "";
 
-        include "connect.php";
+        require_once "src/includes/connect.php";
 
         $query = "SELECT CPU.id, c.model, CPU.socket, CPU.cores, CPU.clock_speed, CPU.tdp FROM CPU JOIN component AS c ON CPU.id = c.id";
         $result = pg_query($db_connection, $query);
@@ -26,6 +26,7 @@
                 $cpuObject->socket = $row['socket'];
                 $cpuObject->cores = $row['cores'];
                 $cpuObject->clock_speed = $row['clock_speed'];
+                $cpuObject->boost_clock_speed = $row['boost_clock_speed'];
                 $cpuObject->TDP = $row['tdp'];
                 
                 $arrayObject[$counter] = (array) $cpuObject;
