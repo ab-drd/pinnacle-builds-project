@@ -12,6 +12,11 @@
             exit();
         }
 
+        if (passwordLength($password) !== false) {
+            header("location: ../signup.php?error=passwordtooshort");
+            exit();
+        }
+
         if (passwordMatch($password, $passwordRepeat) !== false) {
             header("location: ../signup.php?error=passwordsdontmatch");
             exit();
@@ -22,7 +27,7 @@
             exit();
         }
 
-        $passwordHash = hash("sha256", $password);
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         create_account($db_connection, $username, $passwordHash);
     }

@@ -24,5 +24,29 @@
                 </div>
             </form>
         </div>
+        <?php
+            if (isset($_GET["error"])) {
+                if ($_GET["error"] == "invalidusername") {
+                    echo "<p>Choose proper username</p>";
+                }
+                else if ($_GET["error"] == "passwordtooshort") {
+                    echo "<p>Password must be at least 6 characters long</p>";
+                }
+                else if ($_GET["error"] == "passwordsdontmatch") {
+                    echo "<p>Your passwords don't match</p>";
+                }
+                else if ($_GET["error"] == "usernametaken") {
+                    echo "<p>That username is taken</p>";
+                }
+                else if ($_GET["error"] == "stmtfailed" || $_GET["error"] == "end") {
+                    echo "<p>Something went wrong, try again</p>";
+                }
+                else if ($_GET["error"] == "none") {
+                    echo "<p>Account successfully created, you may now log in</p>";
+                    echo `<p><a href="./login.php">Log in now!</a></p>`;
+                }
+            }
+        
+        ?>
     </body>
 </html>
