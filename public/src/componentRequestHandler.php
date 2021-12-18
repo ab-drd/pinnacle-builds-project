@@ -4,38 +4,38 @@
         require_once "./includes/connect.inc.php";
 
         if ($_GET["component"] == "cpu") {
-            listCPUs();
+            listCPUs($db_connection);
         }
         else if ($_GET["component"] == "cpu_fan") {
-            listCPUfFans();
+            listCPUFans($db_connection);
         }
         else if ($_GET["component"] == "ram") {
-            listRAM();
+            listRAM($db_connection);
         }
         else if ($_GET["component"] == "motherboard") {
-            listMotherboards();
+            listMotherboards($db_connection);
         }
         else if ($_GET["component"] == "psu") {
-            listPSU();
+            listPSU($db_connection);
         }
         else if ($_GET["component"] == "ssd") {
-            listSSD();
+            listSSD($db_connection);
         }
         else if ($_GET["component"] == "hdd") {
-            listHDD();
+            listHDD($db_connection);
         }
         else if ($_GET["component"] == "gpu") {
-            listGPU();
+            listGPU($db_connection);
         }
         else if ($_GET["component"] == "pc_case") {
-            listPCCases();
+            listPCCases($db_connection);
         }
 
     }
 
-    function listCPUs() {
+    function listCPUs($connection) {
         $CPUquery = "SELECT * FROM CPU JOIN component AS c ON CPU.id = c.id";
-        $result = pg_query($db_connection, $CPUquery);
+        $result = pg_query($connection, $CPUquery);
 
         if (pg_num_rows($result) > 0) {
             $cpu_array = array();
@@ -55,9 +55,9 @@
         }
     }
 
-    function listCPUFans() {
-        $query = "SELECT * FROM CPU_fan JOIN component AS c ON CPU.id = c.id";
-        $result = pg_query($db_connection, $query);
+    function listCPUFans($connection) {
+        $query = "SELECT * FROM CPU_fan JOIN component AS c ON CPU_fan.id = c.id";
+        $result = pg_query($connection, $query);
 
         if (pg_num_rows($result) > 0) {
             $cpu_fan_array = array();
@@ -76,9 +76,9 @@
         }
     }
 
-    function listRAM() {
-        $query = "SELECT * FROM RAM JOIN component AS c ON RAM.id = c.id";
-        $result = pg_query($db_connection, $query);
+    function listRAM($connection) {
+        $query = "SELECT * FROM RAM AS r JOIN component AS c ON r.id = c.id";
+        $result = pg_query($connection, $query);
 
         if (pg_num_rows($result) > 0) {
             $RAM_array = array();
@@ -86,7 +86,8 @@
 
             while ($row = pg_fetch_assoc($result)) {
 
-                $RAM_object = new RAM($row['id'], $row['model'], $row['unit_price'], $row['quantity'], $row['length']);
+                $RAM_object = new RAM($row['id'], $row['model'], $row['unit_price'],
+                                      $row['quantity'], $row['ddr'], $row['memory_size'], $row['frequency']);
                 
                 $RAM_array[$counter] = (array) $RAM_object;
                 $counter++;
@@ -97,9 +98,9 @@
         }
     }
 
-    function listMotherboards() {
+    function listMotherboards($connection) {
         $query = "SELECT * FROM motherboard AS m JOIN component AS c ON m.id = c.id";
-        $result = pg_query($db_connection, $query);
+        $result = pg_query($connection, $query);
 
         if (pg_num_rows($result) > 0) {
             $motherboard_array = array();
@@ -118,9 +119,9 @@
         }
     }
 
-    function listPSU() {
+    function listPSU($connection) {
         $query = "SELECT * FROM PSU AS p JOIN component AS c ON p.id = c.id";
-        $result = pg_query($db_connection, $query);
+        $result = pg_query($connection, $query);
 
         if (pg_num_rows($result) > 0) {
             $PSU_array = array();
@@ -139,9 +140,9 @@
         }
     }
 
-    function listSSD() {
+    function listSSD($connection) {
         $query = "SELECT * FROM SSD AS s JOIN component AS c ON s.id = c.id";
-        $result = pg_query($db_connection, $query);
+        $result = pg_query($connection, $query);
 
         if (pg_num_rows($result) > 0) {
             $SSD_array = array();
@@ -160,9 +161,9 @@
         }
     }
 
-    function listHDD() {
+    function listHDD($connection) {
         $query = "SELECT * FROM HDD AS h JOIN component AS c ON h.id = c.id";
-        $result = pg_query($db_connection, $query);
+        $result = pg_query($connection, $query);
 
         if (pg_num_rows($result) > 0) {
             $HDD_array = array();
@@ -181,9 +182,9 @@
         }
     }
 
-    function listGPU() {
+    function listGPU($connection) {
         $query = "SELECT * FROM GPU AS g JOIN component AS c ON g.id = c.id";
-        $result = pg_query($db_connection, $query);
+        $result = pg_query($connection, $query);
 
         if (pg_num_rows($result) > 0) {
             $GPU_array = array();
@@ -191,7 +192,7 @@
 
             while ($row = pg_fetch_assoc($result)) {
                 $GPU_object = new GPU($row['id'], $row['model'], $row['unit_price'], $row['quantity'], $row['boost_clock'],
-                                      $row['memory_capacity'], $row['memory_type'], $row['length']);
+                                      $row['memory_capacity'], $row['memory_type'], $row['length'], $row['tdp']);
                 
                 $GPU_array[$counter] = (array) $GPU_object;
                 $counter++;
@@ -202,20 +203,25 @@
         }
     }
 
-    function listPCCases() {
+    function listPCCases($connection) {
         $query = "SELECT * FROM PC_case AS p JOIN component AS c ON p.id = c.id";
-        $result = pg_query($db_connection, $query);
+        $result = pg_query($connection, $query);
 
         if (pg_num_rows($result) > 0) {
             $PC_case_array = array();
             $counter = 0;
 
             while ($row = pg_fetch_assoc($result)) {
-                $PC_case_object = new PC_Case($row['id'], $row['model'], $row['unit_price'], $row['quantity'], $row['format'], $row['height'],
+                if ($counter > 0 && $row['id'] == $PC_case_array[$counter - 1]['id']) { 
+                    $PC_case_array[$counter - 1]['format'][1] = rtrim($row['format']);
+                }
+                else {
+                    $PC_case_object = new PC_Case($row['id'], $row['model'], $row['unit_price'], $row['quantity'], $row['format'], $row['height'],
                                               $row['width'], $row['length'], $row['weight'], $row['gpu_length'], $row['cooler_height']);
-                
-                $PC_case_array[$counter] = (array) $PC_case_object;
-                $counter++;
+
+                    $PC_case_array[$counter] = (array) $PC_case_object;
+                    $counter++;
+                }
             }
 
             $PC_case_json = json_encode($PC_case_array);

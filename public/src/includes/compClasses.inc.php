@@ -128,8 +128,8 @@
         public function __construct($_id, $_model, $_unit_price, $_quantity, $_boost_clock, $_memory_capacity, $_memory_type, $_length, $_TDP) {
             parent::__construct($_id, $_model, $_unit_price, $_quantity);
             $this->boost_clock = $_boost_clock;
-            $this->memory = $_memory_capacity;
-            $this->memory_clock = rtrim($_memory_type);
+            $this->memory_capacity = $_memory_capacity;
+            $this->memory_type = rtrim($_memory_type);
             $this->length = $_length;
             $this->TDP = $_TDP;
         }
@@ -146,7 +146,7 @@
 
         public function __construct($_id, $_model, $_unit_price, $_quantity, $_format, $_height, $_width, $_length, $_weight, $_gpu_length, $_cooler_height) {
             parent::__construct($_id, $_model, $_unit_price, $_quantity);
-            $this->format = rtrim($_format);
+            $this->format = array(rtrim($_format));
             $this->height = $_height;
             $this->width = $_width;
             $this->length = $_length;
