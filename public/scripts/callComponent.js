@@ -3,26 +3,24 @@ cpu_list = document.getElementById("listed-cpu");
 
 cpu_button.addEventListener("click", showCPU);
 
-function showCPU() {
+function fetchComponent() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
-        if (this.readyState==4 && this.status==200) {
-            console.log(this.responseText);
-            var arrayObject = JSON.parse(this.responseText);
+        if (this.readyState == 4 && this.status == 200) {
+            var CPUarray = JSON.parse(this.responseText);
 
-            for (let key in arrayObject) {
+            for (let key in CPUarray) {
                 
-                item = arrayObject[key];
-                for (let property in arrayObject[key]){
-                    cpu_list.innerHTML += `${property} : ${arrayObject[key][property]}<br>`;
+                item = CPUarray[key];
+                for (let property in CPUarray[key]){
+                    cpu_list.innerHTML += `${property} : ${CPUarray[key][property]}<br>`;
                 }
 
                 cpu_list.innerHTML += "<br>";
             }
-            
         }
     }
 
-    xmlhttp.open("GET", "./src/componentRequestHandler.php?q=CPU", true);
+    xmlhttp.open("GET", "./src/componentRequestHandler.php?component=cpu", true);
     xmlhttp.send();
 }
