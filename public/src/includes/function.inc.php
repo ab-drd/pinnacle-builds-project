@@ -1,6 +1,5 @@
 <?php
     function invalidUsername($username) {
-        $result;
         if (!preg_match("/^[a-zA-Z0-9]*$/", $username) || $username == "admin" || $username == "null") {
             $result = true;
         }
@@ -12,7 +11,6 @@
     }
 
     function passwordLength($password) {
-        $result;
         if (strlen($password) < 6) {
             $result = true;
         }
@@ -23,7 +21,6 @@
     }
 
     function passwordMatch($password, $passwordRepeat) {
-        $result;
         if ($password !== $passwordRepeat) {
             $result = true;
         }
@@ -39,7 +36,7 @@
         $statement = pg_prepare($connection, "checkUsername", $query);
 
         if (!$statement) {
-            header("location: ../signup.php?error=stmtfailed");
+            header("location: ../../login.php?error=stmtfailed");
             exit();
         }
 
@@ -60,7 +57,7 @@
         $statement = pg_prepare($connection, "create", $query);
 
         if (!$statement) {
-            header("location: ../signup.php?error=stmtfailed");
+            header("location: ../../login.php?action=signup&error=stmtfailed");
             exit();
         }
 
@@ -70,10 +67,10 @@
         $username, $passwordHash, $dateAndTime));
 
         if ($res) {
-            header("location: ../signup.php?error=none");
+            header("location: ../../login.php?action=signup&error=none");
         }
         else {
-            header("location: ../signup.php?error=end");
+            header("location: ../../login.php?action=signup&error=end");
         }
         
         exit();
@@ -94,7 +91,7 @@
         $usernameExists = usernameExists($connection, $username);
 
         if ($usernameExists === false) {
-            header("location: ../login.php?error=wrongsignin");
+            header("location: ../../login.php?error=wrongsignin");
             exit();
         }
 
@@ -102,14 +99,14 @@
 
         $checkPassword = password_verify($password, rtrim($dbHash));
         if ($checkPassword === false) {
-            header("location: ../login.php?error=wrongsigninpass");
+            header("location: ../../login.php?error=wrongsignin");
             exit();
         }
         else if ($checkPassword === true) {
             session_start();
             $_SESSION["userid"] = $usernameExists["id"];
             $_SESSION["username"] = $usernameExists["username"];
-            header("location: ../redirect.php");
+            header("location: ../../index.php");
             exit();
         }
     }
