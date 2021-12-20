@@ -1,0 +1,13 @@
+body{
+    --color-primary:#d5e408;
+    --color-primary-dark: #beca11;
+    --color-secondary: #e28113;
+    --color-error: #cc3333;
+    --color-success: #4bb544;
+    --border-radius: 4px;
+
+    margin: 0;
+    font-size: 20px;
+    background-color: rgb(65,62,62);
+    background-size: cover;
+}
