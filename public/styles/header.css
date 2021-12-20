@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@700&display=swap');
+
+*{
+	font-family: "Karla";
+	font-weight: 700;
+	margin: 0px;
+	padding: 0px;
+}
+
+li,a{
+	font-size: 20px;
+	color: white;
+	text-decoration: none;
+}
+
+header{ 
+	z-index: 2;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	display: flex;
+	justify-content:space-between;
+	align-items: center;
+	height: 60px;
+	background-color: #1D1D1D;
+}
+
+.tabsLeft{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	list-style: none;
+	margin-inline-start: 40px;
+}
+
+.tabsLeft li {
+	margin:0px 5px;
+}
+
+#builder{
+	color: rgb(226, 11, 11);
+	font-size: 30px;
+}
+
+.tabsRight{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	list-style: none;
+	margin-inline-end: 40px;
+}
+
+.tabsRight li{
+	margin:0px 5px;
+}
+
+
+
+
+
+

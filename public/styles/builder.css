@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@700&display=swap');
+
+*{
+    font-family: "Karla";
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0px;
+}
+
