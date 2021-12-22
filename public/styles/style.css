@@ -177,3 +177,16 @@ input[name="r"]{
     padding: 10px;
     
 } 
+
+.container{
+    width: 400px;
+    max-width: 400px;
+    margin: 1rem;
+    padding: 2rem;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    background: rgb(42,42,42);
+    margin-top: auto;
+    margin-right: auto;
+    margin-left: auto;
+}

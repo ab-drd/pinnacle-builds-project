@@ -43,10 +43,9 @@
                 }
                 else if ($_GET["error"] == "none") {
                     echo "<p>Account successfully created, you may now log in</p>";
-                    echo `<p><a href="./login.php">Log in now!</a></p>`;
+                    echo '<p><a href="./login.php">Log in now!</a></p>';
                 }
             }
-        
         ?>
     </body>
 </html>

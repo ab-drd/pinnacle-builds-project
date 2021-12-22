@@ -8,22 +8,22 @@
         require_once 'connect.inc.php';
 
         if (invalidUsername($username) !== false) {
-            header("location: ../../login.php?action=signup&error=invalidusername");
+            header("location: ../../signup.php?error=invalidusername");
             exit();
         }
 
-        if (usernameExists($db_connection, $username) !== false) {
-            header("location: ../../login.php?action=signup&error=usernametaken");
+        if (usernameExists($db_connection, $username, "signup") !== false) {
+            header("location: ../../signup.php?error=usernametaken");
             exit();
         }
 
         if (passwordLength($password) !== false) {
-            header("location: ../../login.php?action=signup&error=passwordtooshort");
+            header("location: ../../signup.php?error=passwordtooshort");
             exit();
         }
 
         if (passwordMatch($password, $passwordRepeat) !== false) {
-            header("location: ../../login.php?action=signup&error=passwordsdontmatch");
+            header("location: ../../signup.php?error=passwordsdontmatch");
             exit();
         }
 
@@ -32,7 +32,7 @@
         create_account($db_connection, $username, $passwordHash);
     }
     else {
-        header("location: ../../login.php?action=signup");
+        header("location: ../../signup.php");
         exit();
     }
 ?>

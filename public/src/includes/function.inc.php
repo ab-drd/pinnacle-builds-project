@@ -30,8 +30,17 @@
         return $result;
     }
 
-    function usernameExists($connection, $username) {
+    function usernameExists($connection, $username, $form) {
 
+        if (!$connection) {
+            if ($form == "signup") {
+                header("location: ../../signup.php?error=connectionfailed");
+            }
+            else if ($form == "login") {
+                header("location: ../../login.php?error=connectionfailed");
+            }
+        }
+        
         $query = "SELECT ru.id, ru.username, ru.password_hash FROM registered_user AS ru WHERE ru.username = $1";
         $statement = pg_prepare($connection, "checkUsername", $query);
 
@@ -52,12 +61,17 @@
     }
 
     function create_account($connection, $username, $passwordHash) {
+        if (!$connection) {
+            header("location: ../../signup.php?error=connectionfailed");
+            exit();
+        }
+
         $query = "INSERT INTO registered_user(id, username, password_hash, date_created) VALUES ($1, $2, $3, $4);";
 
         $statement = pg_prepare($connection, "create", $query);
 
         if (!$statement) {
-            header("location: ../../login.php?action=signup&error=stmtfailed");
+            header("location: ../../signup.php?error=stmtfailed");
             exit();
         }
 
@@ -67,10 +81,10 @@
         $username, $passwordHash, $dateAndTime));
 
         if ($res) {
-            header("location: ../../login.php?action=signup&error=none");
+            header("location: ../../signup.php?error=none");
         }
         else {
-            header("location: ../../login.php?action=signup&error=end");
+            header("location: ../../signup.php?error=end");
         }
         
         exit();
@@ -88,7 +102,7 @@
     }
 
     function loginUser($connection, $username, $password) {
-        $usernameExists = usernameExists($connection, $username);
+        $usernameExists = usernameExists($connection, $username, "login");
 
         if ($usernameExists === false) {
             header("location: ../../login.php?error=wrongsignin");
