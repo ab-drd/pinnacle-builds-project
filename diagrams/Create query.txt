@@ -70,8 +70,9 @@ CREATE TABLE GPU (
 );
 
 CREATE TABLE pc_case (
-	id				SERIAL REFERENCES component(id) PRIMARY KEY,
-	format			CHAR(64) NOT NULL,
+	id				SERIAL REFERENCES component(id) NOT NULL,
+	format				CHAR(64) NOT NULL,
+	PRIMARY KEY			(id, format),
 	height			REAL NOT NULL,
 	width			REAL NOT NULL,
 	length			REAL NOT NULL,
