@@ -4,13 +4,13 @@
     <head>
         <meta charset="uft-8">
         <title>Pinnacle Builds</title>
-        <link rel="stylesheet" href="./styles/style.css"/>
-        <link rel="icon" href="./images/icon.png">
+        <link rel="stylesheet" href="styles/style.css"/>
+        <link rel="icon" href="images/icon.png">
     </head>
 
     <body>  
 
-      <?php require "./src/header.php"?>
+      <?php require_once "./src/header.php"?>
 
       <main>
           <div class="slidershow middle">
@@ -109,7 +109,7 @@
             
       </main>
       <?php require_once "./src/footer.html" ?>
-      <script src="./scripts/index.js"></script>
+      <script src="scripts/index.js"></script>
     </body>
 
 </html>
