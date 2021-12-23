@@ -25,7 +25,7 @@
       <ul class=compContainer>
 
         <li class="compCPU">
-          <button type="button" class="pickCompClass">
+          <button type="button" class="pickCompClass" id="cpu-button">
             <img src="images/componentCPU.png" height="64" width="64">
             <div class=componentText>
               <h1>CPU</h1>
@@ -35,7 +35,7 @@
         </li>
 
         <li class="compMOBO">
-          <button type="button" class="pickCompClass">
+          <button type="button" class="pickCompClass" id="mobo-button">
             <img src="images/componentMOBO.png" height="64" width="64">
             <div class=componentText>
               <h1>Motherboard</h1>
@@ -45,7 +45,7 @@
         </li>
 
         <li class="compRAM">
-          <button type="button" class="pickCompClass">
+          <button type="button" class="pickCompClass" id="ram-button">
             <img src="images/componentRAM.png" height="64" width="64">
             <div class=componentText>
               <h1>RAM</h1>
@@ -55,7 +55,7 @@
         </li>
 
         <li class="compCOOL">
-          <button type="button" class="pickCompClass">
+          <button type="button" class="pickCompClass" id="cool-button">
             <img src="images/componentCOOL.png" height="64" width="64">
             <div class=componentText>
               <h1>CPU Cooler</h1>
@@ -65,7 +65,7 @@
         </li>
 
         <li class="compGPU">
-          <button type="button" class="pickCompClass">
+          <button type="button" class="pickCompClass" id="gpu-button">
             <img src="images/componentGPU.png" height="64" width="64">
             <div class=componentText>
               <h1>GPU</h1>
@@ -75,7 +75,7 @@
         </li>
 
         <li class="compSSD">
-          <button type="button" class="pickCompClass">
+          <button type="button" class="pickCompClass" id="ssd-button">
             <img src="images/componentSSD.png" height="64" width="64">
             <div class=componentText>
               <h1>SSD</h1>
@@ -85,7 +85,7 @@
         </li>
 
         <li class="compHDD">
-          <button type="button" class="pickCompClass">
+          <button type="button" class="pickCompClass" id="hdd-button">
             <img src="images/componentHDD.png" height="64" width="64">
             <div class=componentText>
               <h1>HDD</h1>
@@ -95,7 +95,7 @@
         </li>
 
         <li class="compPSU">
-          <button type="button" class="pickCompClass">
+          <button type="button" class="pickCompClass" id="psu-button">
             <img src="images/componentPSU.png" height="64" width="64">
             <div class=componentText>
               <h1>PSU</h1>
@@ -105,7 +105,7 @@
         </li>
 
         <li class="compCASE">
-          <button type="button" class="pickCompClass">
+          <button type="button" class="pickCompClass" id="case-button">
             <img src="images/componentCASE.png" height="64" width="64">
             <div class=componentText>
               <h1>Case</h1>
@@ -116,23 +116,23 @@
 
       </ul>
       <div class="listBox">
-        <div class="picker">
-          <h1>Choose CPU:</h1>
+        <div id="picker">
+          <h1 id="pickerName">{CHOOSE_COMP}</h1>
         </div>
         <ul id="list"></ul>
       </div>
     </div>
   </main>
-  <?php require_once "./src/footer.html" ?>
-  <script id="template">
+  <div id="template" hidden>
     <div class="iconName">
-      <img src="images/componentCPU.png" height="64" width="64">
-      <h1>{COMP_NAME}</h1>
+        <img src="{IMG_SRC}" height="64" width="64">
+        <h1>{COMP_NAME}</h1>
     </div>
     <div class="infoPick">
-      <button class="infoButt">ABOUT</button>
-      <button class="pickButt">ADD</button>
+        <button class="infoButt">ABOUT</button>
+        <button class="pickButt">ADD</button>
     </div>
-  </script>
+  </div>
+  <?php require_once "./src/footer.html" ?>
 </body>
 </html>                                     

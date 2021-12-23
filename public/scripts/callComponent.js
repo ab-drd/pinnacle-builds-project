@@ -1,9 +1,59 @@
-// you're free to delete this stuff, I only added it for testing purposes
+document.getElementById("cpu-button").addEventListener("click", fetchCPU);
+document.getElementById("mobo-button").addEventListener("click", fetchMOBO);
+document.getElementById("ram-button").addEventListener("click", fetchRAM);
+document.getElementById("cool-button").addEventListener("click", fetchCool);
+document.getElementById("gpu-button").addEventListener("click", fetchGPU);
+document.getElementById("ssd-button").addEventListener("click", fetchSSD);
+document.getElementById("hdd-button").addEventListener("click", fetchHDD);
+document.getElementById("psu-button").addEventListener("click", fetchPSU);
+document.getElementById("case-button").addEventListener("click", fetchCase);
+
 function fetchCPU() {
     fetchComponents("cpu");
+    replacePickName("Choose CPU:");
 }
 
-fetchCPU();
+function fetchMOBO() {
+    fetchComponents("motherboard");
+    replacePickName("Choose motherboard:");
+}
+
+function fetchRAM() {
+    fetchComponents("ram");
+    replacePickName("Choose RAM:");
+}
+
+function fetchCool() {
+    fetchComponents("cpu_fan");
+    replacePickName("Choose CPU cooler:");
+}
+
+function fetchGPU() {
+    fetchComponents("gpu");
+    replacePickName("Choose GPU:");
+}
+
+function fetchSSD() {
+    fetchComponents("ssd");
+    replacePickName("Choose SSD:");
+}
+
+function fetchHDD() {
+    fetchComponents("hdd");
+    replacePickName("Choose HDD:");
+}
+
+function fetchPSU() {
+    fetchComponents("psu");
+    replacePickName("Choose PSU:");
+}
+
+function fetchCase() {
+    fetchComponents("pc_case");
+    replacePickName("Choose PC Case:");
+}
+
+fetchComponents("cpu");
 
 //ask backend if you want to edit this function
 function fetchComponents(component) {
@@ -37,23 +87,24 @@ function renderComponents(component_array) {
         child.setAttribute('class', 'component');
         child.innerHTML = document.getElementById('template').innerHTML;
 
+        child.innerHTML = child.innerHTML.replace(/{IMG_SRC}/g, `./images/dbpic/${item["model"]}.jpg`);
         child.innerHTML = child.innerHTML
-            .replace(/{COMP_NAME}/g, item["name"])
+            .replace(/{COMP_NAME}/g, item["model"]);
 
         document.getElementById('list').appendChild(child);
     }
 }
 
+function clearComponents() {
+    document.getElementById('list').innerHTML = '';
+}
+
 function componentCallBack(list, component) {
     // must use callback to use data recieved from the server
-    if (component == "cpu") {
-        // do something with the component list
-        renderComponents(list);
-    }
-    else if (component == "cpu_fan") {
-        // do something else
-    }  
-    else {
-        
-    }
+    clearComponents();
+    renderComponents(list);
+}
+
+function replacePickName(parameter) {
+    document.getElementById('pickerName').textContent = parameter;
 }
