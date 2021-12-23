@@ -1,12 +1,9 @@
 // you're free to delete this stuff, I only added it for testing purposes
-cpu_button = document.getElementById("list-cpu");
-cpu_list = document.getElementById("listed-cpu");
-
-cpu_button.addEventListener("click", fetchCPU);
-
 function fetchCPU() {
-    fetchComponents("pc_case");
+    fetchComponents("cpu");
 }
+
+fetchCPU();
 
 //ask backend if you want to edit this function
 function fetchComponents(component) {
@@ -36,12 +33,14 @@ function renderComponents(component_array) {
 
         item = component_array[key];
 
-        for (let property in item){
-            console.log(`${property}: ${item[property]}`);
-            cpu_list.innerHTML += `${property}: ${item[property]}<br>`;
-        }
+        var child = document.createElement('li');
+        child.setAttribute('class', 'component');
+        child.innerHTML = document.getElementById('template').innerHTML;
 
-        cpu_list.innerHTML += "<br>";
+        child.innerHTML = child.innerHTML
+            .replace(/{COMP_NAME}/g, item["name"])
+
+        document.getElementById('list').appendChild(child);
     }
 }
 
@@ -49,6 +48,7 @@ function componentCallBack(list, component) {
     // must use callback to use data recieved from the server
     if (component == "cpu") {
         // do something with the component list
+        renderComponents(list);
     }
     else if (component == "cpu_fan") {
         // do something else
