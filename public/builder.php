@@ -18,13 +18,13 @@
       <ul class="infoTabs">
         <li id ="priceText">Total price: 15000,00 kn</li>
         <li id= "border">|</li>
-        <li id="TDPText">Estimated power draw: 480W</li>
+        <li id="TDPText"></li>
       </ul>
     </nav>
     <div class=builderBox>
       <ul class=compContainer>
 
-        <li class="compCPU">
+        <li id="comp-cpu">
           <button type="button" class="pickCompClass" id="cpu-button">
             <img src="images/componentCPU.png" height="64" width="64">
             <div class=componentText>
@@ -34,7 +34,7 @@
           </button>
         </li>
 
-        <li class="compMOBO">
+        <li id="comp-motherboard">
           <button type="button" class="pickCompClass" id="mobo-button">
             <img src="images/componentMOBO.png" height="64" width="64">
             <div class=componentText>
@@ -44,7 +44,7 @@
           </button>
         </li>
 
-        <li class="compRAM">
+        <li id="comp-ram">
           <button type="button" class="pickCompClass" id="ram-button">
             <img src="images/componentRAM.png" height="64" width="64">
             <div class=componentText>
@@ -54,7 +54,7 @@
           </button>
         </li>
 
-        <li class="compCOOL">
+        <li id="comp-cpu_fan">
           <button type="button" class="pickCompClass" id="cool-button">
             <img src="images/componentCOOL.png" height="64" width="64">
             <div class=componentText>
@@ -64,7 +64,7 @@
           </button>
         </li>
 
-        <li class="compGPU">
+        <li id="comp-gpu">
           <button type="button" class="pickCompClass" id="gpu-button">
             <img src="images/componentGPU.png" height="64" width="64">
             <div class=componentText>
@@ -74,7 +74,7 @@
           </button>
         </li>
 
-        <li class="compSSD">
+        <li id="comp-ssd">
           <button type="button" class="pickCompClass" id="ssd-button">
             <img src="images/componentSSD.png" height="64" width="64">
             <div class=componentText>
@@ -84,7 +84,7 @@
           </button>
         </li>
 
-        <li class="compHDD">
+        <li id="comp-hdd">
           <button type="button" class="pickCompClass" id="hdd-button">
             <img src="images/componentHDD.png" height="64" width="64">
             <div class=componentText>
@@ -94,7 +94,7 @@
           </button>
         </li>
 
-        <li class="compPSU">
+        <li id="comp-psu">
           <button type="button" class="pickCompClass" id="psu-button">
             <img src="images/componentPSU.png" height="64" width="64">
             <div class=componentText>
@@ -104,7 +104,7 @@
           </button>
         </li>
 
-        <li class="compCASE">
+        <li id="comp-pc_case">
           <button type="button" class="pickCompClass" id="case-button">
             <img src="images/componentCASE.png" height="64" width="64">
             <div class=componentText>

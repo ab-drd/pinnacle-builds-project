@@ -8,6 +8,9 @@ document.getElementById("hdd-button").addEventListener("click", fetchHDD);
 document.getElementById("psu-button").addEventListener("click", fetchPSU);
 document.getElementById("case-button").addEventListener("click", fetchCase);
 
+let tdp = document.getElementById("TDPText");
+let price = document.getElementById("priceText");
+
 function fetchCPU() {
     fetchComponents("cpu");
     replacePickName("Choose CPU:");
@@ -53,7 +56,7 @@ function fetchCase() {
     replacePickName("Choose PC Case:");
 }
 
-fetchComponents("cpu");
+fetchCPU();
 
 //ask backend if you want to edit this function
 function fetchComponents(component) {
@@ -78,9 +81,8 @@ function fetchComponents(component) {
 }
 
 // simple render function
-function renderComponents(component_array) {
+function renderComponents(component_array, component) {
     for (let key in component_array) {
-
         item = component_array[key];
 
         var child = document.createElement('li');
@@ -88,10 +90,19 @@ function renderComponents(component_array) {
         child.innerHTML = document.getElementById('template').innerHTML;
 
         child.innerHTML = child.innerHTML.replace(/{IMG_SRC}/g, `./images/dbpic/${item["model"]}.jpg`);
-        child.innerHTML = child.innerHTML
-            .replace(/{COMP_NAME}/g, item["model"]);
+        child.innerHTML = child.innerHTML.replace(/{COMP_NAME}/g, item["model"]);
+
+        let infoButton = child.getElementsByClassName("infoButt")[0];
+        infoButton.addEventListener("click", renderInfo);
+        let pickButton = child.getElementsByClassName("pickButt")[0]
+        pickButton.addEventListener("click", addComponent);
+
+        infoButton.setAttribute('class', `infoButt`);
+        pickButton.setAttribute('class', `pickButt ${component}`);
 
         document.getElementById('list').appendChild(child);
+        /* addEventListener("click", addComponent);
+        addEventListener("click", renderInfo); */
     }
 }
 
@@ -102,9 +113,24 @@ function clearComponents() {
 function componentCallBack(list, component) {
     // must use callback to use data recieved from the server
     clearComponents();
-    renderComponents(list);
+    renderComponents(list, component);
 }
 
 function replacePickName(parameter) {
     document.getElementById('pickerName').textContent = parameter;
+}
+
+function addComponent(e) {
+    let button = e.target;
+    let item = button.parentElement.parentElement.getElementsByClassName('iconName')[0];
+    let compType = button.classList[1];
+    document.getElementById('pickerName').textContent = item;
+
+    document.getElementById(`comp-${compType}`);
+
+
+}
+
+function renderInfo(e) {
+    document.getElementById('pickerName').textContent = "render";
 }
