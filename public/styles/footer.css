@@ -1,18 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@700&display=swap');
 
-*{
-    font-family: "Karla";
-    font-weight: 700;
-    font-size: 20px;
-    margin: 0px;
-}
-
 footer{
     z-index: 2;
     position: relative;
     bottom: 0;
     width: 100%;
-    min-height: 60px;
+    height: 60px;
     background-color: rgb(23, 22, 22);
     display: flex;
     justify-content: center;
@@ -21,11 +14,26 @@ footer{
 }
 
 #fIcon{
-    margin: 0px 20px;
+    margin: 0px 10px;
     margin-top: 5px;
 }
 
 #corp{
-    margin: 0px 20px;
+    font-family: "Karla";
+    font-weight: 700;
+    font-size: 11px;
+    margin: 5px 10px;
     color: white;
+}
+
+@media screen and (min-width: 425px) {
+    #corp{
+      font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    #corp{
+        font-size: 20px;
+    }
 }

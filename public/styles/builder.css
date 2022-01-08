@@ -24,7 +24,7 @@ main{
 }
 
 nav{
-    z-index: 2;
+    z-index: 1;
 	position: fixed;
 	top: 60px;
 	width: 100%;
