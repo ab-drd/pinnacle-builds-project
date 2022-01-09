@@ -89,7 +89,7 @@ function renderComponents(component_array, component) {
         child.setAttribute('class', 'component');
         child.innerHTML = document.getElementById('template').innerHTML;
 
-        child.innerHTML = child.innerHTML.replace(/{IMG_SRC}/g, `./images/dbpic/${item["model"]}.jpg`);
+        child.innerHTML = child.innerHTML.replace(/{IMG_SRC}/g, `./images/dbpic/${component}/${item["model"]}.jpg`);
         child.innerHTML = child.innerHTML.replace(/{COMP_NAME}/g, item["model"]);
 
         let infoButton = child.getElementsByClassName("infoButt")[0];

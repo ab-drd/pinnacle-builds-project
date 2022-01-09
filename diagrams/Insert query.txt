@@ -82,11 +82,11 @@ INSERT INTO component(model, quantity, unit_price) VALUES
 ('Asus TUF Gaming RTX 3060 12G OC ', 5, 2600),
 ('Asus Dual GTX 1060 6G OC', 8, 1200),
 ('Gigabyte RX 6900XT Gaming OC 16G', 3, 8400),
-('Sapphire Niro+ RX 6700XT 16G', 8, 4400),
+('Sapphire Nitro+ RX 6700XT 16G', 8, 4400),
 ('Fractal Torrent Black TG', 4, 1550),
 ('Fractal Define 7 Compact White TG', 3, 1020),
 ('Fractal Meshify 2 Black TG', 4, 890),
-('Fractal Definie Mini C TG', 1, 700),
+('Fractal Define Mini C TG', 1, 700),
 ('Phanteks Eclipse P400A', 5, 730),
 ('Corsair Carbide 275R', 4, 640),
 ('NZXT H510', 7, 610);
