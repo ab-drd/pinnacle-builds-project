@@ -126,9 +126,10 @@ function addComponent(e) {
     let compType = button.classList[1];
     document.getElementById('pickerName').textContent = item;
 
-    document.getElementById(`comp-${compType}`);
+    let componentButton = document.getElementById(`comp-${compType}`);
 
-
+    componentButton.querySelector("h2").textContent = item.querySelector("h1").textContent;
+    componentButton.querySelector("img").src = item.querySelector("img").src;
 }
 
 function renderInfo(e) {
