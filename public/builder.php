@@ -10,6 +10,7 @@
   <link rel="icon" href="images/icon.png">
   <link rel="stylesheet" href="styles/builder.css"/>
   <script src="scripts/callComponent.js" defer></script>
+  <script src="scripts/infoComponent.js" defer></script>
 </head>
 <body>
   <?php require_once "./src/header.php"?>
@@ -123,16 +124,30 @@
       </div>
     </div>
   </main>
-  <div id="template" hidden>
-    <div class="iconName">
-        <img src="{IMG_SRC}" height="64" width="64">
-        <h1>{COMP_NAME}</h1>
-    </div>
-    <div class="infoPick">
-        <button class="infoButt">ABOUT</button>
-        <button class="pickButt">ADD</button>
-    </div>
-  </div>
+
   <?php require_once "./src/footer.html" ?>
 </body>
+
+<div id="template" hidden>
+  <div class="iconName">
+      <img src="{IMG_SRC}" height="64" width="64">
+      <h1>{COMP_NAME}</h1>
+  </div>
+  <div class="infoPick">
+      <button class="infoButt">ABOUT</button>
+      <button class="pickButt">ADD</button>
+  </div>
+</div>
+
+<div id="infoTemplate" hidden>
+  <div class="popup">
+    <div class="pop-nav">
+      <h1>Intel Core i9-12900K</h1>
+      <button class="infoClose"></button>
+    </div>
+    <img id="pop-img"src="images/dbpic/Intel Core i9-12900K.jpg" height="200px" width="200px">
+    <ul class="specList"></ul>
+  </div>
+</div>
+
 </html>                                     
