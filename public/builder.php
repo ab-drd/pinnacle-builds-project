@@ -130,17 +130,8 @@
         <h1>Intel Core i9-12900K</h1>
         <span class="infoClose">&times;</span>
       </div>
-      <img id="pop-img"src="images/dbpic/cpu/Intel Core i9-12900K.jpg" height="200px" width="200px">
-      <ul class="specList">
-        <li class="specElem">
-          <h2>Cores:</h2>
-          <p>10</p>
-        </li>
-        <li class="specElem">
-          <h2>Threads:</h2>
-          <p>20</p>
-        </li>
-      </ul>
+      <img id="pop-img" height="200px" width="200px">
+      <ul id="specList"></ul>
     </div>
   </div>
 
@@ -156,6 +147,11 @@
       <button id="infoButton" class="infoButt">ABOUT</button>
       <button class="pickButt">ADD</button>
   </div>
+</div>
+
+<div id="specTemplate" hidden>
+  <h2>{SPEC_NAME}</h2>
+  <p>{SPEC_INFO}</p>
 </div>
 
 </html>                                     

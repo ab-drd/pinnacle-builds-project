@@ -94,7 +94,7 @@ function renderComponents(component_array, component) {
         child.innerHTML = child.innerHTML.replace(/{COMP_NAME}/g, item["model"]);
 
         let infoButton = child.getElementsByClassName("infoButt")[0];
-        infoButton.addEventListener("click", renderInfo);
+        infoButton.addEventListener("click", fetchInfo);
         let pickButton = child.getElementsByClassName("pickButt")[0]
         pickButton.addEventListener("click", addComponent);
 
@@ -132,8 +132,84 @@ function addComponent(e) {
     componentButton.querySelector("img").src = item.querySelector("img").src;
 }
 
-function renderInfo(e) {
+function fetchInfo(e) {
+    let fetchButton = e.target;
+    let item = fetchButton.parentElement.parentElement;
+
+    let model = item.querySelector("h1").textContent;
+    let component = item.getElementsByClassName("pickButt")[0].classList[1];
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("got answer");
+            console.log(this.responseText);
+            if (this.responseText) {
+                list = JSON.parse(this.responseText);
+                infoCallback(list, component);
+            }
+        }
+    }
+
+    console.log(encodeURIComponent(model));
+    xmlhttp.open("GET", `./src/infoRequestHandler.php?model=${encodeURIComponent(model)}
+                            &component=${encodeURIComponent(component)}`, true);
+    xmlhttp.send();
+}
+
+function infoCallback(list, component) {
+    clearInfo();
+    renderInfo(list, component);
+}
+
+function renderInfo(list, component) {
     infoTemplate.style.display = "block";
+
+    infoTemplate.querySelector("img").src = `./images/dbpic/${component}/${list["model"].trim()}.jpg`;
+    infoTemplate.querySelector("h1").innerHTML = list["model"].trim();
+
+    for (key in list) {
+        if (key != "model" && key != "id") {
+            let attribute = list[key];
+
+            let specChild = document.createElement('li');
+            specChild.setAttribute('class', 'specElem');
+            specChild.innerHTML = document.getElementById('specTemplate').innerHTML;
+            
+            switch(key){
+                case 'quantity':
+                    specChild.innerHTML = specChild.innerHTML.replace(/{SPEC_NAME}/g, "Left in stock:");
+                    specChild.innerHTML = specChild.innerHTML.replace(/{SPEC_INFO}/g, attribute);
+                    break;
+                    case 'quantity':
+                        specChild.innerHTML = specChild.innerHTML.replace(/{SPEC_NAME}/g, "Left in stock:");
+                        specChild.innerHTML = specChild.innerHTML.replace(/{SPEC_INFO}/g, attribute);
+                        break;
+            }
+
+            switch(component){
+
+                case 'cpu':
+                    switch(key){
+                        case 'quantity':
+                            specChild.innerHTML = specChild.innerHTML.replace(/{SPEC_NAME}/g, "");
+                            specChild.innerHTML = specChild.innerHTML.replace(/{SPEC_INFO}/g, attribute);
+                            break;
+                    }
+                    break;
+                case 'motherboard':
+            }
+
+            specChild.innerHTML = specChild.innerHTML.replace(/{SPEC_NAME}/g, key);
+            specChild.innerHTML = specChild.innerHTML.replace(/{SPEC_INFO}/g, attribute);
+
+            document.getElementById('specList').appendChild(specChild);
+        }
+    }
+}
+
+function clearInfo() {
+    document.getElementById('specList').innerHTML = "";
 }
 
 document.getElementsByClassName("infoClose")[0].addEventListener("click", function() {

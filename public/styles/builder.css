@@ -108,14 +108,14 @@ ul li::marker {
     border: solid 1px black;
 }
 
-.componentText h1{
+h1{
     margin: 0px 15px;
     text-align: start;
     font-size: 20px;
     color: black;
 }
 
-.componentText h2{
+h2{
     margin: 0px 15px;
     text-align: start;
     color: gray;
@@ -259,7 +259,7 @@ div.picker{
     margin: auto;
 }
 
-.specList{
+#specList{
    
     margin-top: 16px;
     display: flex;
