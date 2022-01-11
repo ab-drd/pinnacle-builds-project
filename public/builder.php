@@ -10,7 +10,6 @@
   <link rel="icon" href="images/icon.png">
   <link rel="stylesheet" href="styles/builder.css"/>
   <script src="scripts/callComponent.js" defer></script>
-  <script src="scripts/infoComponent.js" defer></script>
 </head>
 <body>
   <?php require_once "./src/header.php"?>
@@ -125,6 +124,26 @@
     </div>
   </main>
 
+  <div id="modal" class="infoTemplate">
+    <div id="popup">
+      <div id="pop-nav">
+        <h1>Intel Core i9-12900K</h1>
+        <span class="infoClose">&times;</span>
+      </div>
+      <img id="pop-img"src="images/dbpic/cpu/Intel Core i9-12900K.jpg" height="200px" width="200px">
+      <ul class="specList">
+        <li class="specElem">
+          <h2>Cores:</h2>
+          <p>10</p>
+        </li>
+        <li class="specElem">
+          <h2>Threads:</h2>
+          <p>20</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
   <?php require_once "./src/footer.html" ?>
 </body>
 
@@ -134,19 +153,8 @@
       <h1>{COMP_NAME}</h1>
   </div>
   <div class="infoPick">
-      <button class="infoButt">ABOUT</button>
+      <button id="infoButton" class="infoButt">ABOUT</button>
       <button class="pickButt">ADD</button>
-  </div>
-</div>
-
-<div id="infoTemplate" hidden>
-  <div class="popup">
-    <div class="pop-nav">
-      <h1>Intel Core i9-12900K</h1>
-      <button class="infoClose"></button>
-    </div>
-    <img id="pop-img"src="images/dbpic/Intel Core i9-12900K.jpg" height="200px" width="200px">
-    <ul class="specList"></ul>
   </div>
 </div>
 

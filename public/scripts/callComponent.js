@@ -10,6 +10,7 @@ document.getElementById("case-button").addEventListener("click", fetchCase);
 
 let tdp = document.getElementById("TDPText");
 let price = document.getElementById("priceText");
+let infoTemplate = document.getElementById('modal');
 
 function fetchCPU() {
     fetchComponents("cpu");
@@ -89,7 +90,7 @@ function renderComponents(component_array, component) {
         child.setAttribute('class', 'component');
         child.innerHTML = document.getElementById('template').innerHTML;
 
-        child.innerHTML = child.innerHTML.replace(/{IMG_SRC}/g, `./images/dbpic/${item["model"]}.jpg`);
+        child.innerHTML = child.innerHTML.replace(/{IMG_SRC}/g, `./images/dbpic/${component}/${item["model"]}.jpg`);
         child.innerHTML = child.innerHTML.replace(/{COMP_NAME}/g, item["model"]);
 
         let infoButton = child.getElementsByClassName("infoButt")[0];
@@ -101,7 +102,7 @@ function renderComponents(component_array, component) {
         pickButton.setAttribute('class', `pickButt ${component}`);
 
         document.getElementById('list').appendChild(child);
-        /* addEventListener("click", addComponent);
+        /*addEventListener("click", addComponent);
         addEventListener("click", renderInfo); */
     }
 }
@@ -124,7 +125,6 @@ function addComponent(e) {
     let button = e.target;
     let item = button.parentElement.parentElement.getElementsByClassName('iconName')[0];
     let compType = button.classList[1];
-    document.getElementById('pickerName').textContent = item;
 
     let componentButton = document.getElementById(`comp-${compType}`);
 
@@ -133,5 +133,9 @@ function addComponent(e) {
 }
 
 function renderInfo(e) {
-    document.getElementById('pickerName').textContent = "render";
+    infoTemplate.style.display = "block";
 }
+
+document.getElementsByClassName("infoClose")[0].addEventListener("click", function() {
+    infoTemplate.style.display = "none";
+});
