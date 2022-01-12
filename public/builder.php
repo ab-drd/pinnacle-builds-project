@@ -9,7 +9,7 @@
   <title>Pinnacle builds | Custom PC</title>
   <link rel="icon" href="images/icon.png">
   <link rel="stylesheet" href="styles/builder.css"/>
-  <script src="scripts/callComponent.js" defer></script>
+  <script src="scripts/builder.js" defer></script>
 </head>
 <body>
   <?php require_once "./src/header.php"?>
@@ -17,8 +17,8 @@
     <nav>
       <ul class="infoTabs">
         <li id ="priceText">Total price: 15000,00 kn</li>
-        <li id= "border">|</li>
-        <li id="TDPText"></li>
+        <li id="TDPText">430W</li>
+        <button id="addtocart">Add to your cart</button>
       </ul>
     </nav>
     <div class=builderBox>
