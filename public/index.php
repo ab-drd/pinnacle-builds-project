@@ -17,6 +17,11 @@
 
               <div class="slides">
 
+                <div id="startBuild">
+                  <h1>Custom PCs Made Easy</h1>
+                  <a href="builder.php"><button id="goBuilder">Start your build!</button></a>
+                </div>
+
                 <input type="radio" name="r" id="r1" checked>
                 <input type="radio" name="r" id="r2">
                 <input type="radio" name="r" id="r3">
