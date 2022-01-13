@@ -7,6 +7,7 @@
         <title>Pinnacle Builds | Cart</title>
         <link rel="icon" href="./images/icon.png">
         <link rel="stylesheet" href="styles/cart.css">
+        <script src="scripts/cart.js" defer></script>
     </head>
     <body>
         <?php require_once "./src/header.php"?>

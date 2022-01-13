@@ -1,4 +1,4 @@
-let dictSName = {
+const dictSName = {
     "quantity" : "In stock:",
     "unit_price" : "Price:",
     "socket" : "Socket:",
@@ -35,7 +35,7 @@ let dictSName = {
     "cooler_height" : "Maximum CPU cooler heigth:"
 }
 
-let dictSInfo = {
+const dictSInfo = {
     "quantity" : "",
     "unit_price" : " Kn",
     "socket" : "",
@@ -71,7 +71,11 @@ let dictSInfo = {
     "gpu_length" : "mm",
     "cooler_height" : "mm"
 }
+fetchCPU();
 
+widthCheck();
+
+window.addEventListener('resize',widthCheck);
 
 document.getElementById("cpu-button").addEventListener("click", fetchCPU);
 document.getElementById("mobo-button").addEventListener("click", fetchMOBO);
@@ -82,10 +86,36 @@ document.getElementById("ssd-button").addEventListener("click", fetchSSD);
 document.getElementById("hdd-button").addEventListener("click", fetchHDD);
 document.getElementById("psu-button").addEventListener("click", fetchPSU);
 document.getElementById("case-button").addEventListener("click", fetchCase);
+document.getElementById("addtocart").addEventListener("click", addToCart);
+
+document.getElementById("cpu-button-mobile").addEventListener("click", fetchCPU);
+document.getElementById("mobo-button-mobile").addEventListener("click", fetchMOBO);
+document.getElementById("ram-button-mobile").addEventListener("click", fetchRAM);
+document.getElementById("cool-button-mobile").addEventListener("click", fetchCool);
+document.getElementById("gpu-button-mobile").addEventListener("click", fetchGPU);
+document.getElementById("ssd-button-mobile").addEventListener("click", fetchSSD);
+document.getElementById("hdd-button-mobile").addEventListener("click", fetchHDD);
+document.getElementById("psu-button-mobile").addEventListener("click", fetchPSU);
+document.getElementById("case-button-mobile").addEventListener("click", fetchCase);
 
 let tdp = document.getElementById("TDPText");
 let price = document.getElementById("priceText");
 let infoTemplate = document.getElementById('modal');
+
+function widthCheck(){
+    let pickerContent=document.getElementById("pickerName");
+    let mobilePicker=document.getElementById("compContainerMobile");
+
+    if(document.documentElement.clientWidth<769){
+        pickerContent.style.display="none";
+        mobilePicker.style.display="flex";
+    }
+    else{
+        pickerContent.style.display="block";
+        mobilePicker.style.display="none";
+    }
+
+}
 
 function fetchCPU() {
     fetchComponents("cpu");
@@ -140,7 +170,6 @@ function fetchComponents(component) {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             try {
-                console.log(this.responseText);
                 list = JSON.parse(this.responseText);
             }
             catch(err) {
@@ -178,8 +207,6 @@ function renderComponents(component_array, component) {
         pickButton.setAttribute('class', `pickButt ${component}`);
 
         document.getElementById('list').appendChild(child);
-        /*addEventListener("click", addComponent);
-        addEventListener("click", renderInfo); */
     }
 }
 
@@ -195,6 +222,13 @@ function componentCallBack(list, component) {
 
 function replacePickName(parameter) {
     document.getElementById('pickerName').textContent = parameter;
+    let mobileButtons=document.getElementsByClassName("pickCompClass mobile");
+    
+    for(let el of mobileButtons){
+        el.style.display="none";
+    }
+
+    document.getElementById(`cpu-button-mobile`).style.display="flex";
 }
 
 function addComponent(e) {
@@ -204,8 +238,16 @@ function addComponent(e) {
 
     let componentButton = document.getElementById(`comp-${compType}`);
 
+    let componentButtonMobile = document.getElementById(`comp-${compType}-mobile`);
+
     componentButton.querySelector("h2").textContent = item.querySelector("h1").textContent;
     componentButton.querySelector("img").src = item.querySelector("img").src;
+
+    componentButtonMobile.querySelector("h2").textContent = item.querySelector("h1").textContent;
+    componentButtonMobile.querySelector("img").src = item.querySelector("img").src;
+
+    calculatePrice();
+    calculatePower();
 }
 
 function fetchInfo(e) {
@@ -215,19 +257,15 @@ function fetchInfo(e) {
     let model = item.querySelector("h1").textContent;
     let component = item.getElementsByClassName("pickButt")[0].classList[1];
 
-    var xmlhttp = new XMLHttpRequest();
+    let xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            console.log("got answer");
-            console.log(this.responseText);
             if (this.responseText) {
                 list = JSON.parse(this.responseText);
                 infoCallback(list, component);
             }
         }
     }
-
-    console.log(encodeURIComponent(model));
     xmlhttp.open("GET", `./src/infoRequestHandler.php?model=${encodeURIComponent(model)}
                             &component=${encodeURIComponent(component)}`, true);
     xmlhttp.send();
@@ -267,3 +305,126 @@ function clearInfo() {
 document.getElementsByClassName("infoClose")[0].addEventListener("click", function() {
     infoTemplate.style.display = "none";
 });
+
+function calculatePrice() {
+    
+    let pick_comps = document.getElementsByClassName("desktopClass");
+    let price_txt = document.getElementById("priceText");
+    let totalPrice = 0;
+
+    for (let i = 0; i < pick_comps.length; i++) {
+        let pick_comp = pick_comps[i];
+        let model = pick_comp.querySelector("h2").textContent;
+        if (model != "None") {
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    if (this.responseText) {
+                        let price = parseInt(this.responseText);
+                        totalPrice += price;
+
+                        price_txt.textContent = `Total price: ${totalPrice},00 Kn`;
+                    }
+                }
+            }
+            xmlhttp.open("GET", `./src/priceRequestHandler.php?model=${encodeURIComponent(model)}`, true);
+            xmlhttp.send();
+        }
+    }
+}
+
+function priceRequest(model) {
+    
+}
+
+function calculatePower() {
+    let pick_comps = document.getElementsByClassName("desktopClass");
+    let tdp_txt = document.getElementById("TDPText");
+    let totalTDP = 0;
+
+    for (let i = 0; i < pick_comps.length; i++) {
+        let pick_comp = pick_comps[i];
+        let model = pick_comp.querySelector("h2").textContent;
+        let component = pick_comp.parentElement.id.replace("comp-", "");
+        if (model != "None") {
+            if (component == "gpu" || component == "cpu" || component == "psu") {
+                let xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        if (this.responseText) {
+                            let power = parseInt(this.responseText);
+                            if (component == "psu") {
+                                let psu_text = document.getElementById("PSUText");
+                                psu_text.textContent = `${power}W MAX`;
+                            }
+                            else {
+                                totalTDP += power;
+                                tdp_txt.textContent = `${totalTDP}W`;
+                            }
+                        }
+                    }
+                }
+                xmlhttp.open("GET", `./src/powerRequestHandler.php?model=${encodeURIComponent(model)}
+                                        &component=${encodeURIComponent(component)}`, true);
+                xmlhttp.send();
+            }
+            else {
+                totalTDP += 5;
+    
+                tdp_txt.textContent = `${totalTDP}W`;
+            }
+        }
+    }
+}
+
+function addToCart() {
+    let pick_comps = document.getElementsByClassName("desktopClass");
+    let price = document.getElementById("priceText").textContent.replace("Total price: ", "").replace(",00 Kn", "");
+    let componentModels = "";
+
+    for (let i = 0; i < pick_comps.length; i++) {
+        let pick_comp = pick_comps[i];
+        let model = pick_comp.querySelector("h2").textContent;
+
+        if (model == "None") {
+            break;
+        }
+
+        componentModels += `&comp_${i}=${encodeURIComponent(model)}`;
+    }
+
+    let uid = getCookie("user_id");
+    console.log(uid);
+
+    if (!uid) {
+        uid = 1002; //guest ID
+    }
+
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText) {
+                let status = this.responseText;
+                console.log(status);
+            }
+        }
+    }
+    xmlhttp.open("GET", `./src/cartHandler.php?action=save&user_id=${encodeURIComponent(uid)}
+                        &price=${encodeURIComponent(price)}&${componentModels}`, true);
+    xmlhttp.send();
+}
+
+function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+        }
+    }
+    return false;
+}

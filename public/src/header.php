@@ -16,7 +16,7 @@
             <div id="drop">
                 <ul class="tabsLeft">
                     <li id="build"><a id=builder href="./builder.php">BUILD</a></li>
-                    <li id="prebuilts"><a href="prebuilts.html">PREBUILT PCS</a></li>
+                    <li id="prebuilts"><a href="./prebuilts.php">PREBUILT PCS</a></li>
                     <li id="about"><a href="about.html">ABOUT US</a></li>
                 </ul>
                 <ul class="tabsRight">

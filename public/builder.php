@@ -16,8 +16,9 @@
   <main>
     <nav>
       <ul class="infoTabs">
-        <li id ="priceText">Total price: 15000,00 kn</li>
-        <li id="TDPText">430W</li>
+        <li id ="priceText">Total price: 0,00 kn</li>
+        <li id="TDPText">0W</li>
+        <li id="PSUText">0W MAX</li>
         <button id="addtocart">Add to your cart</button>
       </ul>
     </nav>
@@ -25,7 +26,7 @@
       <ul class=compContainer>
 
         <li id="comp-cpu">
-          <button type="button" class="pickCompClass" id="cpu-button">
+          <button type="button" class="pickCompClass desktopClass" id="cpu-button">
             <img src="images/componentCPU.png" height="64" width="64">
             <div class=componentText>
               <h1>CPU</h1>
@@ -35,7 +36,7 @@
         </li>
 
         <li id="comp-motherboard">
-          <button type="button" class="pickCompClass" id="mobo-button">
+          <button type="button" class="pickCompClass desktopClass" id="mobo-button">
             <img src="images/componentMOBO.png" height="64" width="64">
             <div class=componentText>
               <h1>Motherboard</h1>
@@ -45,7 +46,7 @@
         </li>
 
         <li id="comp-ram">
-          <button type="button" class="pickCompClass" id="ram-button">
+          <button type="button" class="pickCompClass desktopClass" id="ram-button">
             <img src="images/componentRAM.png" height="64" width="64">
             <div class=componentText>
               <h1>RAM</h1>
@@ -55,7 +56,7 @@
         </li>
 
         <li id="comp-cpu_fan">
-          <button type="button" class="pickCompClass" id="cool-button">
+          <button type="button" class="pickCompClass desktopClass" id="cool-button">
             <img src="images/componentCOOL.png" height="64" width="64">
             <div class=componentText>
               <h1>CPU Cooler</h1>
@@ -65,7 +66,7 @@
         </li>
 
         <li id="comp-gpu">
-          <button type="button" class="pickCompClass" id="gpu-button">
+          <button type="button" class="pickCompClass desktopClass" id="gpu-button">
             <img src="images/componentGPU.png" height="64" width="64">
             <div class=componentText>
               <h1>GPU</h1>
@@ -75,7 +76,7 @@
         </li>
 
         <li id="comp-ssd">
-          <button type="button" class="pickCompClass" id="ssd-button">
+          <button type="button" class="pickCompClass desktopClass" id="ssd-button">
             <img src="images/componentSSD.png" height="64" width="64">
             <div class=componentText>
               <h1>SSD</h1>
@@ -85,7 +86,7 @@
         </li>
 
         <li id="comp-hdd">
-          <button type="button" class="pickCompClass" id="hdd-button">
+          <button type="button" class="pickCompClass desktopClass" id="hdd-button">
             <img src="images/componentHDD.png" height="64" width="64">
             <div class=componentText>
               <h1>HDD</h1>
@@ -95,7 +96,7 @@
         </li>
 
         <li id="comp-psu">
-          <button type="button" class="pickCompClass" id="psu-button">
+          <button type="button" class="pickCompClass desktopClass" id="psu-button">
             <img src="images/componentPSU.png" height="64" width="64">
             <div class=componentText>
               <h1>PSU</h1>
@@ -105,7 +106,7 @@
         </li>
 
         <li id="comp-pc_case">
-          <button type="button" class="pickCompClass" id="case-button">
+          <button type="button" class="pickCompClass desktopClass" id="case-button">
             <img src="images/componentCASE.png" height="64" width="64">
             <div class=componentText>
               <h1>Case</h1>
@@ -118,6 +119,99 @@
       <div class="listBox">
         <div id="picker">
           <h1 id="pickerName">{CHOOSE_COMP}</h1>
+          <ul id=compContainerMobile>
+
+              <li id="comp-cpu-mobile">
+                <button type="button" class="pickCompClass mobile" id="cpu-button-mobile">
+                  <img src="images/componentCPU.png" height="64" width="64">
+                  <div class=componentText>
+                    <h1>CPU</h1>
+                    <h2>None</h2>
+                  </div>
+                </button>
+              </li>
+
+              <li id="comp-motherboard-mobile">
+                <button type="button" class="pickCompClass mobile" id="mobo-button-mobile" >
+                  <img src="images/componentMOBO.png" height="64" width="64">
+                  <div class=componentText>
+                    <h1>Motherboard</h1>
+                    <h2>None</h2>
+                  </div>
+                </button>
+              </li>
+
+              <li id="comp-ram-mobile">
+                <button type="button" class="pickCompClass mobile" id="ram-button-mobile">
+                  <img src="images/componentRAM.png" height="64" width="64">
+                  <div class=componentText>
+                    <h1>RAM</h1>
+                    <h2>None</h2>
+                  </div>
+                </button>
+              </li>
+
+              <li id="comp-cpu_fan-mobile">
+                <button type="button" class="pickCompClass mobile" id="cool-button-mobile">
+                  <img src="images/componentCOOL.png" height="64" width="64">
+                  <div class=componentText>
+                    <h1>CPU Cooler</h1>
+                    <h2>None</h2>
+                  </div>
+                </button>
+              </li>
+
+              <li id="comp-gpu-mobile">
+                <button type="button" class="pickCompClass mobile" id="gpu-button-mobile">
+                  <img src="images/componentGPU.png" height="64" width="64">
+                  <div class=componentText>
+                    <h1>GPU</h1>
+                    <h2>None</h2>
+                  </div>
+                </button>
+              </li>
+
+              <li id="comp-ssd-mobile">
+                <button type="button" class="pickCompClass mobile" id="ssd-button-mobile">
+                  <img src="images/componentSSD.png" height="64" width="64">
+                  <div class=componentText>
+                    <h1>SSD</h1>
+                    <h2>None</h2>
+                  </div>
+                </button>
+              </li>
+
+              <li id="comp-hdd-mobile">
+                <button type="button" class="pickCompClass mobile" id="hdd-button-mobile">
+                  <img src="images/componentHDD.png" height="64" width="64">
+                  <div class=componentText>
+                    <h1>HDD</h1>
+                    <h2>None</h2>
+                  </div>
+                </button>
+              </li>
+
+              <li id="comp-psu-mobile">
+                <button type="button" class="pickCompClass mobile" id="psu-button-mobile">
+                  <img src="images/componentPSU.png" height="64" width="64">
+                  <div class=componentText>
+                    <h1>PSU</h1>
+                    <h2>None</h2>
+                  </div>
+                </button>
+              </li>
+
+              <li id="comp-pc_case-mobile">
+                <button type="button" class="pickCompClass mobile" id="case-button-mobile">
+                  <img src="images/componentCASE.png" height="64" width="64">
+                  <div class=componentText>
+                    <h1>Case</h1>
+                    <h2>None</h2>
+                  </div>
+                </button>
+              </li>
+          </ul>
+          
         </div>
         <ul id="list"></ul>
       </div>

@@ -333,6 +333,18 @@ div.picker{
     }
 }
 
+#compContainerMobile{
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+}
+
+
+
+ul li::marker {
+    color: rgba(255, 0, 0, 0);
+    display: none;
+  }
 
 
 

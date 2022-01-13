@@ -208,3 +208,17 @@ INSERT INTO PC_case(id, format, length, width, height, weight, gpu_length, coole
 
 INSERT INTO registered_user(id, username, password_hash, date_created) VALUES
 (1000, 'admin', '$2y$10$tn2KInYOvFyjFKbrkXwXgOLFJxxsHZL0TE1g0rsUId4Lgo4U5.ez2', NOW());
+
+INSERT INTO pc_configuration(total_price, ismadebyuser, name) VALUES
+(14530, FALSE, 'The Monster');
+
+INSERT INTO configuration_component(component_id, configuration_id) VALUES
+(5, 1),
+(37, 1),
+(21, 1),
+(15, 1),
+(80, 1),
+(64, 1),
+(73, 1),
+(46, 1),
+(85, 1);

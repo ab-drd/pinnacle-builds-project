@@ -101,8 +101,9 @@ CREATE TABLE registered_user (
 	date_created	TIMESTAMP NOT NULL
 );
 
-CREATE TABLE buy_order (
-	id				SERIAL PRIMARY KEY,
+CREATE TABLE cart (
 	user_id			INTEGER NOT NULL REFERENCES registered_user(id),
-	created_on		TIMESTAMP NOT NULL
+	pc_configuration	INTEGER NOT NULL REFERENCES pc_configuration(id),
+	
+	PRIMARY KEY (user_id, pc_configuration)
 );
