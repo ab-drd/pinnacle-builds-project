@@ -37,17 +37,17 @@
         }
 
         if ($confID) {
-            for ($i = 0; $i < 8; $i++) {
+            for ($i = 0; $i < 9; $i++) {
                 $model = $_GET["comp_$i"];
                 $query = "SELECT id FROM component WHERE model = '$model';";
                 $result = pg_query($db_connection, $query);
                 if ($row = pg_fetch_assoc($result)) {
                     $id = $row['id'];
 
-                    $query2 = "INSERT INTO configuration_component(component_id, configuration_id) VALUES ($id, $confID);";
-                    $result2 = pg_query($db_connection, $query2);
+                    $query3 = "INSERT INTO configuration_component(component_id, configuration_id) VALUES ($id, $confID);";
+                    $result3 = pg_query($db_connection, $query3);
 
-                    if (!$result2) {
+                    if (!$result3) {
                         echo 0;
                         exit();
                     }
@@ -76,21 +76,33 @@
         $user_id = $_GET["user_id"];
         $echoArray = array();
 
-        $query = "SELECT pc.id, c.model FROM cart JOIN pc_configuration AS pc ON cart.pc_configuration = pc.id
-                 JOIN configuration_component AS cc ON pc.id = cc.configuration_id
-                 JOIN component AS c ON cc.component_id = c.id
-                 WHERE cart.user_id = $user_id;";
+        $getIdsQuery = "SELECT pc_configuration FROM cart WHERE user_id = '$user_id';";
+        $idsResult = pg_query($db_connection, $getIdsQuery);
 
-        $result = pg_query($db_connection, $query);
-        if ($result) {
-            while ($row = pg_fetch_assoc($result)) {
-                array_push($echoArray, trim($row["model"]));
+        if ($idsResult) {
+            while ($row = pg_fetch_assoc($idsResult)) {
+                $echoArray[intval($row["pc_configuration"])] = array();
             }
+        }
 
-            echo json_encode($echoArray);
+        foreach (array_keys($echoArray) as $configId) {
+            $query = "SELECT c.model FROM pc_configuration AS pc JOIN configuration_component AS cc ON pc.id = cc.configuration_id
+                    JOIN component AS c ON cc.component_id = c.id
+                    WHERE pc.id = $configId;";
+
+            $result = pg_query($db_connection, $query);
+
+            if ($result) {
+                while ($row = pg_fetch_assoc($result)) {
+                    array_push($echoArray[$configId], trim($row["model"]));
+                }
+            }
+            else {
+                echo 0;
+                exit();
+            }
         }
-        else {
-            echo 0;
-        }
+
+        echo json_encode($echoArray);
     }
 ?>
