@@ -69,6 +69,47 @@ input[name="r"]{
     display: flex;
 }
 
+#startBuild{
+    position: absolute;
+    z-index: 1;
+    top: 35%;
+    right: 70%;
+    width: 20%;
+    background-color: rgba(0, 0, 0, 0.397);
+    border-radius: 12px;
+    padding: 1%;
+}
+
+#startBuild h1{
+    font-size: 65px;
+    font-weight: bolder;
+    color: white;
+    filter: drop-shadow(0 0 0.30rem orange);
+}
+
+#startBuild button{
+    margin-top: 16px;
+    background-color: white;
+    border-radius: 12px;
+    font-size: 30px;
+    color: black;
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    overflow: hidden;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: transform 150ms ease-in-out, filter 350ms ease-in-out;
+    filter: drop-shadow(0 0 0.30rem orange);
+}
+
+#startBuild button:hover{
+    transform: scale(1.05,1.05);
+
+    filter: drop-shadow(0 0 0.90rem orangered);
+}
+
 .slide{
     width: 20%;
     transition: 2.5s;
