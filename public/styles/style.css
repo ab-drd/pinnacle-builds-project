@@ -11,7 +11,6 @@
 
 body{
     padding: 0;
-    background-color: rgb(35, 34, 34);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -19,8 +18,8 @@ body{
 main{
     z-index: 1;
     flex-grow: 1;
+    background-color: rgb(116, 10, 10);
     width: 100%;
-    background-color: rgb(35, 34, 34);
     display: flex;
     flex-direction: column;
     margin-top: 60px;
@@ -72,10 +71,10 @@ input[name="r"]{
 #startBuild{
     position: absolute;
     z-index: 1;
-    top: 35%;
-    right: 70%;
-    width: 20%;
-    background-color: rgba(0, 0, 0, 0.397);
+    top: 35vh;
+    left: 5vw;
+    width: fit-content;
+    background-color: rgba(0, 0, 0, 0.4);
     border-radius: 12px;
     padding: 1%;
 }
@@ -183,25 +182,38 @@ input[name="r"]{
 
 /* ????????? PARAGRAFI ????????? */
 #article-container{
-    background-color: rgb(35, 34, 34);
+    background-color: rgb(116, 10, 10);
     display:grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 0.5em;
-    grid-row-gap: 0.5em;
-    margin: 5px 20px;
-    
-}
-.article-image{
-    margin: 0px;
-    padding: 0px;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 7px;
+    margin: 7px 0px;
     overflow: hidden;
 }
-.article-image img{
-    max-width: 100%;
-    height: auto;
-    border-radius: 20px;
+
+.article-card{
+    height: 70vh;
+    overflow: hidden;
 }
 
+.article-image-pre{
+    background-image: url("../images/prebuiltAd.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.article-image-cus{
+    background-image: url("../images/builderAd.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
 .article-content h3{
     
     margin-left: 10px;
@@ -209,7 +221,6 @@ input[name="r"]{
     
 }
 .paragraph{
-    background-color: rgb(35, 34, 34);
     border-radius: 30px;
     padding: 50px;
     justify-content: center;

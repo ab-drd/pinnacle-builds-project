@@ -18,7 +18,8 @@
               <div class="slides">
 
                 <div id="startBuild">
-                  <h1>Custom PCs Made Easy</h1>
+                  <h1>Custom PCs</h1>
+                  <h1>Made Easy</h1>
                   <a href="builder.php"><button id="goBuilder">Start your build!</button></a>
                 </div>
 
@@ -68,9 +69,7 @@
             </div>
             <div id="article-container">
             <article class="article-card">
-              <figure class="article-image">
-                <img src="images/prebuiltAd.jpg" alt="buidler">
-              </figure>
+              <div class="article-image-pre"></div>
               <div class="article-content">
                 <h3 class="title">Prebuilds</h3>
                 <p class="paragraph">
@@ -88,27 +87,25 @@
                     If you want to change few parts in prebuilt PC, we will 
                     give you the PROS and CONS in doing that.
                 </p>
-                </div>
-              </article>
+              </div>
+            </article>
 
-              <article class="article-card">
-                <div class="article-content">
-                  <figure class="article-image" id="slika">
-                    <img src="images/builderAd.jpg" alt="buidler">
-                  </figure>
-                  <h3 class="title">Builder info</h3>
-                  <p class="paragraph">
-                    Our builder gives you the opportunity to build yourself 
-                    your personalized PC. Besides the large selection of components, we offer you the possibility 
-                    to give you suggestions.
-                  </p>
-                  <p class="paragraph">
-                    Based on your choiceof components, we give you the compatible component 
-                    and the explanation behind our choice. 
-                    This will save your time a big time.
-                  </p>
-                  </div>
-                </article>
+            <article class="article-card">
+              <div class="article-image-cus"></div>
+              <div class="article-content">
+                    <h3 class="title">Builder info</h3>
+                    <p class="paragraph">
+                      Our builder gives you the opportunity to build yourself 
+                      your personalized PC. Besides the large selection of components, we offer you the possibility 
+                      to give you suggestions.
+                    </p>
+                    <p class="paragraph">
+                      Based on your choiceof components, we give you the compatible component 
+                      and the explanation behind our choice. 
+                      This will save your time a big time.
+                    </p>
+              </div>
+            </article>
 
             </div>
             
