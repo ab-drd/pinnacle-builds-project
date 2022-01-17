@@ -7,11 +7,8 @@
         <link rel="stylesheet" href="styles/style.css"/>
         <link rel="icon" href="images/icon.png">
     </head>
-
     <body>  
-
       <?php require_once "./src/header.php"?>
-
       <main>
           <div class="slidershow middle">
 
@@ -98,12 +95,9 @@
                   </div>
               </div>
             </article>
-
             </div>
-            
       </main>
       <?php require_once "./src/footer.html" ?>
       <script src="scripts/index.js"></script>
     </body>
-
 </html>

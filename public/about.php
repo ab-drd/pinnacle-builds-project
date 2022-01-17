@@ -17,12 +17,12 @@
             <h1>Pinnacle builds project</h1>
             <h2>Made by:</h2>
             <ul>
-                <li>Antonia Bartulovic - complete backend</li>
+                <li>Antonia Bartulović - complete backend</li>
                 <li>Jakov Bejo - builder, prebuilts & cart frontend</li>
-                <li>Rosana Mamic - login & signup frontend</li>
-                <li>Jakov Milic - homepage & prebuilts frontend</li>
+                <li>Rosana Mamić - login & signup frontend</li>
+                <li>Jakov Milić - homepage & prebuilts frontend</li>
             </ul>
-            <p>Project made for purposes of "Programming engineering"</p>
+            <p>This project was created for the purposes of a college project.</p>
         </div>
 
     </main>
