@@ -69,41 +69,33 @@
             </div>
             <div id="article-container">
             <article class="article-card">
-              <div class="article-image-pre"></div>
-              <div class="article-content">
-                <h3 class="title">Prebuilds</h3>
-                <p class="paragraph">
-                    If you have no idea how to build a PC yourself,
-                    we offer you a huge variety of prebuilt computers
-                    made for every individual’s specific wants and needs.
-                </p>
-                <p class="paragraph">
-                    Buying a prebuilt computer may cost you less 
-                    than buying the components and building it yourself.
-                    Our affordable prices and the pridjev compatibility 
-                    among the components will make you want to use exactly 
-                    this site. We offer you the best service.
-                <p class="paragraph">
-                    If you want to change few parts in prebuilt PC, we will 
-                    give you the PROS and CONS in doing that.
-                </p>
+              <div class="article-image-pre">
+                <div class="article-content">
+                  <h3 class="title">Prebuilts</h3>
+                  <p class="paragraph">
+                      No clue where to start on a build? Fear not! We've got you covered. 
+                  </p>
+                  <p class="paragraph">
+                      Choose from an array of already finished configurations, ready for whatever you need!
+                      No matter your needs, there is bound to be something that suits you.
+                  </p>
+                </div>
               </div>
             </article>
 
             <article class="article-card">
-              <div class="article-image-cus"></div>
-              <div class="article-content">
-                    <h3 class="title">Builder info</h3>
-                    <p class="paragraph">
-                      Our builder gives you the opportunity to build yourself 
-                      your personalized PC. Besides the large selection of components, we offer you the possibility 
-                      to give you suggestions.
-                    </p>
-                    <p class="paragraph">
-                      Based on your choiceof components, we give you the compatible component 
-                      and the explanation behind our choice. 
-                      This will save your time a big time.
-                    </p>
+              <div class="article-image-cus">
+                  <div class="article-content">
+                        <h3 class="title">The Builder</h3>
+                        <p class="paragraph">
+                          The Builder is your go-to if you want the freedom of putting together your own components,
+                          but would still rather leave the actual building part to someone else.
+                        </p>
+                        <p class="paragraph">
+                          Our team of experienced engineers will gather the components of your choosing and build the PC you've
+                          always dreamed of.
+                        </p>
+                  </div>
               </div>
             </article>
 

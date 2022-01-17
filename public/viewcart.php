@@ -15,12 +15,13 @@
 
             <nav>
               <ul class="infoTabs">
-                <li id ="priceText">Total price: 15000,00 kn</li>
+                <li id ="priceText">Total price: 0 Kn</li>
                 <button id="checkout">Checkout</button>
               </ul>
             </nav>
 
-            <ul class="cart"></ul>
+            <ul class="cart hidden"></ul>
+            <div class="empty-cart">Your cart is empty. Go choose something and come back!</div>
             
         </main>
         <?php require_once "./src/footer.html" ?>

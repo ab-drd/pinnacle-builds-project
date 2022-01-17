@@ -12,12 +12,12 @@
     function loadPrebuilts($db_connection) {
         $echoArray = array();
 
-        $cIDq = "SELECT id, name FROM pc_configuration WHERE ismadebyuser = 'f';";
+        $cIDq = "SELECT id, name, total_price FROM pc_configuration WHERE ismadebyuser = 'f';";
         $cIDresult = pg_query($db_connection, $cIDq);
 
         if ($cIDresult) {
             while ($row = pg_fetch_assoc($cIDresult)) {
-                $echoArray[intval($row["id"])] = array(trim($row["name"]));
+                $echoArray[intval($row["id"])] = array(trim($row["name"]), $row["total_price"]);
             }
         }
 

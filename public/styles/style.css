@@ -80,7 +80,7 @@ input[name="r"]{
 }
 
 #startBuild h1{
-    font-size: 65px;
+    font-size: 64px;
     font-weight: bolder;
     color: white;
     filter: drop-shadow(0 0 0.30rem orange);
@@ -203,6 +203,9 @@ input[name="r"]{
     height: 100%;
     width: 100%;
     object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .article-image-cus{
@@ -213,21 +216,34 @@ input[name="r"]{
     height: 100%;
     width: 100%;
     object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
-.article-content h3{
-    
-    margin-left: 10px;
 
-    
+.article-content{
+    margin: 5vw;
+    padding: 2vw;
+    border-radius: 16px;
+    background-color: rgba(255, 255, 255, 0.726);
+    width: 45vw;
 }
+
+.article-content h3{
+    font-size: 64px;
+    font-weight: bolder;
+    color: rgb(116, 10, 10);
+    filter: drop-shadow(0 0 0.60rem rgb(255, 127, 7));
+}
+
 .paragraph{
+    font-size: 20px;
     border-radius: 30px;
     padding: 50px;
     justify-content: center;
-
+    color: black;
     text-align: justify;
     padding: 10px;
-    
 } 
 
 .container{
@@ -241,4 +257,18 @@ input[name="r"]{
     margin-top: auto;
     margin-right: auto;
     margin-left: auto;
+}
+
+@media screen and (max-width: 768px){
+    .article-content h3{
+        font-size: 48px;
+    }
+    
+    .paragraph{
+        font-size: 16px;
+    } 
+
+    .article-content{
+        width: 80vw;
+    }
 }

@@ -3,6 +3,12 @@
         require_once "./includes/connect.inc.php";
 
         switch ($_GET["action"]){
+            case "delete":
+                deleteFromCart($db_connection);
+                break;
+            case "add":
+                addToCart($db_connection);
+                break;
             case "save":
                 saveCart($db_connection);
                 break;
@@ -11,8 +17,6 @@
                 break;
         }
     }
-
-    
 
     function createConfiguration($db_connection) {
         $price = $_GET["price"];
@@ -76,16 +80,21 @@
         $user_id = $_GET["user_id"];
         $echoArray = array();
 
-        $getIdsQuery = "SELECT pc_configuration FROM cart WHERE user_id = '$user_id';";
+        $getIdsQuery = "SELECT c.pc_configuration, pc.name, pc.total_price FROM cart AS c 
+                        JOIN pc_configuration AS pc ON c.pc_configuration = pc.id
+                        WHERE user_id = '$user_id';";
+        
         $idsResult = pg_query($db_connection, $getIdsQuery);
 
         if ($idsResult) {
             while ($row = pg_fetch_assoc($idsResult)) {
-                $echoArray[intval($row["pc_configuration"])] = array();
+                $echoArray[intval($row["pc_configuration"])] = array(trim($row["name"]), $row["total_price"]);
             }
         }
+        $counter = 0;
 
         foreach (array_keys($echoArray) as $configId) {
+            $counter += 1;
             $query = "SELECT c.model FROM pc_configuration AS pc JOIN configuration_component AS cc ON pc.id = cc.configuration_id
                     JOIN component AS c ON cc.component_id = c.id
                     WHERE pc.id = $configId;";
@@ -102,7 +111,66 @@
                 exit();
             }
         }
+        if ($counter) {
+            echo json_encode($echoArray);
+        }
+        else {
+            echo 0;
+        }
+    }
 
-        echo json_encode($echoArray);
+    function addToCart($db_connection) {
+        $confID = getConfiguration($db_connection, $_GET["name"]);
+        $user_id = $_GET["user_id"];
+
+        $query = "INSERT INTO cart(user_id, pc_configuration) VALUES ($user_id, $confID);";
+        $result = pg_query($db_connection, $query);
+
+        if ($result) {
+            echo 1;
+        }
+        else {
+            echo 0;
+        }
+    }
+
+    function getConfiguration($db_connection, $confName) {
+        $query = "SELECT id FROM pc_configuration WHERE name='$confName'";
+        $result = pg_query($db_connection, $query);
+
+        if ($row = pg_fetch_assoc($result)) {
+            return $row["id"];
+        }
+        else {
+            return 0;
+        }
+    }
+
+    function deleteFromCart($db_connection) {
+        $user_id = $_GET["user_id"];
+        $conf = $_GET["conf"];
+        $flag = intval($_GET["flag"]);
+
+        if ($flag) {
+            $id = $conf;
+        }
+        else {
+            $query = "SELECT id FROM pc_configuration WHERE name = '$conf'";
+            $result = pg_query($db_connection, $query);
+
+            if ($row = pg_fetch_assoc($result)) {
+                $id = $row["id"];
+            }
+        }
+
+        $delQuery = "DELETE FROM cart WHERE user_id = $user_id AND pc_configuration = $id";
+        $delResult = pg_query($db_connection, $delQuery);
+
+        if ($delResult) {
+            echo 1;
+        }
+        else {
+            echo 0;
+        }
     }
 ?>

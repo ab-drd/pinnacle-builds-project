@@ -56,8 +56,10 @@ header{
 }
 
 #drop li a{
+	filter: drop-shadow(0 0 0.15rem orange);
 	opacity: 0;
 	transition: opacity 150ms ease-in-out;
+	transition: filter 300ms ease-in-out;
 }
 
 #drop-toggle:checked ~ #drop{
@@ -138,7 +140,8 @@ header{
 	}
 
 	#drop li a:hover {
-		color:rgb(230, 79, 79);
+		color:rgb(255, 0, 0);
+		filter: drop-shadow(0 0 0.90rem orangered);
 	}
 
 	#drop-label span,
@@ -170,11 +173,4 @@ header{
 	.tabsRight li{
 		margin:0px 16px;
 	}
-	
-	
 }
-
-
-
-
-
