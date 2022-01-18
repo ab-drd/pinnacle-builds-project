@@ -71,12 +71,10 @@ const dictSInfo = {
     "gpu_length" : "mm",
     "cooler_height" : "mm"
 }
-fetchCPU();
 
-widthCheck();
+let selectComps = new Array();
 
 window.addEventListener('resize',widthCheck);
-
 document.getElementById("cpu-button").addEventListener("click", fetchCPU);
 document.getElementById("mobo-button").addEventListener("click", fetchMOBO);
 document.getElementById("ram-button").addEventListener("click", fetchRAM);
@@ -186,11 +184,18 @@ function fetchComponents(component) {
     xmlhttp.send();
 }
 
-// simple render function
+function clearComponents() {
+    document.getElementById('list').innerHTML = '';
+}
+
+function componentCallBack(list, component) {
+    clearComponents();
+    renderComponents(list, component);
+}
+
 function renderComponents(component_array, component) {
     for (let key in component_array) {
         item = component_array[key];
-
         var child = document.createElement('li');
         child.setAttribute('class', 'component');
         child.innerHTML = document.getElementById('template').innerHTML;
@@ -206,19 +211,86 @@ function renderComponents(component_array, component) {
         infoButton.setAttribute('class', `infoButt`);
         pickButton.setAttribute('class', `pickButt ${component}`);
 
+        if (component == "cpu") {
+            for (let i = 0; i < selectComps.length; i++) {
+                if (selectComps[i][0] == "motherboard") {
+                    if (item["socket"] != selectComps[i][1]) {
+                        child.classList.add("no");
+                    }
+                    break;
+                }
+                else if (selectComps[i][0] == "ram") {
+                    if ((item["socket"] == "LGA 1700" && selectComps[i][1] == "DDR4") || (item["socket"] != "LGA 1700" && selectComps[i][1] == "DDR5")) {
+                        child.classList.add("no");
+                    }
+                    break;
+                }
+            }
+        }
+        else if (component == "motherboard") {
+            for (let i = 0; i < selectComps.length; i++) {
+                if (selectComps[i][0] == "cpu") {
+                    if (item["socket"] != selectComps[i][1]) {
+                        child.classList.add("no");
+                    }
+                    break;
+                }
+                else if (selectComps[i][0] == "ram") {
+                    if ((item["socket"] == "LGA 1700" && selectComps[i][1] == "DDR4") || (item["socket"] != "LGA 1700" && selectComps[i][1] == "DDR5")) {
+                        child.classList.add("no");
+                    }
+                    break;
+                }
+            }
+        }
+        else if (component == "ram") {
+            for (let i = 0; i < selectComps.length; i++) {
+                if (selectComps[i][0] == "motherboard" || selectComps[i][0] == "cpu") {
+                    if ((selectComps[i][1] == "LGA 1700" && item["ddr"] == "DDR4") || (selectComps[i][1] != "LGA 1700" && item["ddr"] == "DDR5")) {
+                        child.classList.add("no");
+                    }
+                    break;
+                }
+            }
+        }
+        else if (component == "gpu") {
+            for (let i = 0; i < selectComps.length; i++) {
+                if (selectComps[i][0] == "pc_case") {
+                    if (item["length"] >= selectComps[i][1][0]) {
+                        child.classList.add("no");
+                    }
+                    break;
+                }
+            }
+        }
+        else if (component == "cpu_fan") {
+            for (let i = 0; i < selectComps.length; i++) {
+                if (selectComps[i][0] == "pc_case") {
+                    if (item["length"] >= selectComps[i][1][1]) {
+                        child.classList.add("no");
+                    }
+                    break;
+                }
+            }
+        }
+        else if (component == "pc_case") {
+            for (let i = 0; i < selectComps.length; i++) {
+                if (selectComps[i][0] == "gpu") {
+                    if (item["gpu_length"] <= selectComps[i][1]) {
+                        child.classList.add("no");
+                    }
+                }
+                else if (selectComps[i][0] == "cpu_fan") {
+                    if (item["cooler_height"] <= selectComps[i][1]) {
+                        child.classList.add("no");
+                    }
+                }
+            }
+        }
+
         document.getElementById('list').appendChild(child);
     }
-}
-
-function clearComponents() {
-    document.getElementById('list').innerHTML = '';
-}
-
-function componentCallBack(list, component) {
-    // must use callback to use data recieved from the server
-    clearComponents();
-    renderComponents(list, component);
-}
+ }
 
 function replacePickName(parameter) {
     document.getElementById('pickerName').textContent = parameter;
@@ -234,17 +306,43 @@ function replacePickName(parameter) {
 function addComponent(e) {
     let button = e.target;
     let item = button.parentElement.parentElement.getElementsByClassName('iconName')[0];
+    let model = item.querySelector("h1").textContent;
     let compType = button.classList[1];
 
     let componentButton = document.getElementById(`comp-${compType}`);
 
     let componentButtonMobile = document.getElementById(`comp-${compType}-mobile`);
 
-    componentButton.querySelector("h2").textContent = item.querySelector("h1").textContent;
+    componentButton.querySelector("h2").textContent = model;
     componentButton.querySelector("img").src = item.querySelector("img").src;
 
-    componentButtonMobile.querySelector("h2").textContent = item.querySelector("h1").textContent;
+    componentButtonMobile.querySelector("h2").textContent = model;
     componentButtonMobile.querySelector("img").src = item.querySelector("img").src;
+
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText) {
+                if (compType == "pc_case") {
+                    list = JSON.parse(this.responseText);
+                }
+                else {
+                    list = this.responseText;
+                }
+                for (let i = 0; i < selectComps.length; i++) {
+                    if (selectComps[i][0] == compType) {
+                        selectComps.splice(i, 1);
+                        break;
+                    }
+                }
+                selectComps.push([compType, list]);
+                console.log(selectComps);
+            }
+        }
+    }
+    xmlhttp.open("GET", `./src/infoRequestHandler.php?action=add&model=${encodeURIComponent(model)}
+                            &component=${encodeURIComponent(compType)}`, true);
+    xmlhttp.send();
 
     calculatePrice();
     calculatePower();
@@ -266,7 +364,7 @@ function fetchInfo(e) {
             }
         }
     }
-    xmlhttp.open("GET", `./src/infoRequestHandler.php?model=${encodeURIComponent(model)}
+    xmlhttp.open("GET", `./src/infoRequestHandler.php?action=info&model=${encodeURIComponent(model)}
                             &component=${encodeURIComponent(component)}`, true);
     xmlhttp.send();
 }
@@ -394,7 +492,6 @@ function addToCart() {
     }
 
     let uid = getCookie("user_id");
-    console.log(uid);
 
     if (!uid) {
         uid = 1002; //guest ID
@@ -428,3 +525,6 @@ function getCookie(cname) {
     }
     return false;
 }
+
+fetchCPU();
+widthCheck();

@@ -78,7 +78,7 @@ function addToCart(e) {
         }
     }
 
-    xmlhttp.open("GET", `./src/cartHandler.php?action=add&name=${confName}&user_id=${uid}`, true);
+    xmlhttp.open("GET", `./src/cartHandler.php?action=add&name=${encodeURIComponent(confName)}&user_id=${uid}`, true);
     xmlhttp.send();
 }
 

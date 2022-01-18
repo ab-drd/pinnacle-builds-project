@@ -12,7 +12,7 @@ main{
     background-color: rgb(214, 214, 214);
     display: flex;
     flex-direction: column;
-    margin-top: 6vh;
+    margin-top: 60px;
     display: grid;
 }
 
@@ -20,8 +20,8 @@ main{
     background-color: rgb(214, 214, 214);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 25px;
-    grid-row-gap: 0.5em;
+    grid-column-gap: 32px;
+    grid-row-gap: 32px;
     margin-top: 30px;
     margin-bottom: 30px;
     margin-right: 100px;

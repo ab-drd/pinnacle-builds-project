@@ -346,6 +346,12 @@ ul li::marker {
     display: none;
   }
 
+.no{
+    filter: grayscale(75%);
+    background-color: hsl(243, 41%, 90%);
+    pointer-events: none;
+}
+
 
 
 
