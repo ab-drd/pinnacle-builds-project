@@ -72,6 +72,18 @@ const dictSInfo = {
     "cooler_height" : "mm"
 }
 
+const picked = {
+    "cpu":"",
+    "motherboard":"",
+    "ram":"",
+    "cpu_fan":"",
+    "gpu":"",
+    "ssd":"",
+    "hdd":"",
+    "psu":"",
+    "pc_case":""
+}
+
 let selectComps = new Array();
 
 window.addEventListener('resize',widthCheck);
@@ -195,6 +207,7 @@ function componentCallBack(list, component) {
 
 function renderComponents(component_array, component) {
     for (let key in component_array) {
+
         item = component_array[key];
         var child = document.createElement('li');
         child.setAttribute('class', 'component');
@@ -287,6 +300,18 @@ function renderComponents(component_array, component) {
                 }
             }
         }
+        
+        if(picked[component]==item["model"])
+        {
+            pickButton.parentElement.parentElement.style.border = "solid 1px rgb(155, 17, 17)";
+            pickButton.textContent = "ADDED";
+            pickButton.style.pointerEvents = "none";
+        }
+
+        if(pickButton.parentElement.parentElement.className == "component no"){
+            pickButton.style.pointerEvents = "none";
+        }
+
 
         document.getElementById('list').appendChild(child);
     }
@@ -304,10 +329,32 @@ function replacePickName(parameter) {
 }
 
 function addComponent(e) {
+
+    let pickButtons = document.getElementsByClassName("pickButt");
+
+    for(let i = 0; i < pickButtons.length; i++){
+        pickButtons[i].textContent = "ADD";
+        pickButtons[i].parentElement.parentElement.style.border = "none";
+        console.log(pickButtons[i].parentElement.parentElement.className);
+        if(pickButtons[i].parentElement.parentElement.className == "component no"){
+            pickButtons[i].style.pointerEvents = "none";
+        }
+        else{
+            pickButtons[i].style.pointerEvents = "auto";
+        }
+            
+    }
+
     let button = e.target;
     let item = button.parentElement.parentElement.getElementsByClassName('iconName')[0];
     let model = item.querySelector("h1").textContent;
     let compType = button.classList[1];
+    
+    picked[compType]=model;
+
+    button.parentElement.parentElement.style.border = "solid 1px rgb(155, 17, 17)";
+    button.textContent = "ADDED";
+    button.style.pointerEvents = "none";
 
     let componentButton = document.getElementById(`comp-${compType}`);
 
